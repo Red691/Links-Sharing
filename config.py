@@ -5,8 +5,8 @@ from logging.handlers import RotatingFileHandler
 
 #Recommended
 TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "0")
-APP_ID = int(os.environ.get("APP_ID", "20594537"))
-API_HASH = os.environ.get("API_HASH", "c505a4e5bb7d482197875888af544f17")
+APP_ID = int(os.environ.get("APP_ID", ""))
+API_HASH = os.environ.get("API_HASH", "")
 
 ##---------------------------------------------------------------------------------------------------
 
@@ -16,7 +16,7 @@ PORT = os.environ.get("PORT", "8010")
 
 ##---------------------------------------------------------------------------------------------------
 
-#Database
+#Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://kumarnikhil05848:kumarnikhil05848@cluster0.1nr8lgj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "Anime Sensei links-sharing")
 
