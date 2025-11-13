@@ -18,7 +18,7 @@ PORT = os.environ.get("PORT", "8010")
 
 #Database 
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://kumarnikhil05848:kumarnikhil05848@cluster0.1nr8lgj.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
-DB_NAME = os.environ.get("DATABASE_NAME", "Anime Sensei links-sharing")
+DB_NAME = os.environ.get("DATABASE_NAME", "Sensei")
 
 ##---------------------------------------------------------------------------------------------------
 
