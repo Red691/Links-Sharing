@@ -20,6 +20,10 @@ PORT = os.environ.get("PORT", "8010")
 DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://kumarnikhil05848:Kumarnikhil1513832380@cluster0.1nr8lgj.mongodb.net/?appName=Cluster0")
 DB_NAME = os.environ.get("DATABASE_NAME", "Sensei")
 
+# Required for ForceSub
+MONGO_URL = DB_URI
+ADMIN = OWNER_ID
+
 ##---------------------------------------------------------------------------------------------------
 
 #Default
