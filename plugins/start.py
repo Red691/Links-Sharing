@@ -156,7 +156,7 @@ async def help_callback(client: Bot, callback_query):
     
     
     await callback_query.answer()
-    await callback_query.message.edit_text("<b><i>About Us..\n\n‣ Made for : @Red_999_Yt\n‣ Main Channel: @Anime_Sensei_Official\n‣ Repo : Red_999_Yt\n\n  !!</i></b>", reply_markup=inline_buttons)
+    await callback_query.message.edit_text("<b><i>About Us..\n\n‣ Made for : @Red_999_Yt\n‣ Main Channel: @Anime_Sensei_Official\n\n </i></b>", reply_markup=inline_buttons)
 
 @Bot.on_callback_query(filters.regex("close"))
 async def close_callback(client: Bot, callback_query):
