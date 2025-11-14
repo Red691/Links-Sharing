@@ -1,8 +1,9 @@
 from pyrogram import Client, filters
 from pymongo import MongoClient
-from config import MONGO_URL, ADMIN
+from config import MONGO_URL, DB_NAME, ADMIN
 
-db = MongoClient(MONGO_URL)["ForceSubDB"]
+# Connect to your real database
+db = MongoClient(MONGO_URL)[DB_NAME]    # <-- ForceSubDB हटा दिया
 force_col = db["force_sub"]
 
 # -------------------- Add Force Channel --------------------
@@ -59,4 +60,4 @@ async def check_sub(client, message):
             invite = await client.create_chat_invite_link(ch["channel"])
             return await message.reply(
                 f"You must join first:\n{invite.invite_link}"
-  )
+    )
