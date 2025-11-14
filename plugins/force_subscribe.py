@@ -1,15 +1,13 @@
 from pyrogram import Client, filters
 from pymongo import MongoClient
-from config import DB_URI, DB_NAME, ADMINS
+from sub import DB_URI, DB_NAME, ADMINS  # Using your config/sub.py variables
 
-# MongoDB connection
-db = MongoClient(DB_URI)[DB_NAME]  # Config se DB_NAME use karo
-force_col = db["force_sub"]
+# ------------------- Database Connection -------------------
+db = MongoClient(DB_URI)[DB_NAME]
+force_col = db["force_sub"]  # Collection for force subscribe channels
+ADMIN = ADMINS[0]  # Main admin
 
-# Default admin
-ADMIN = ADMINS[0]  # pehla admin as default
-
-# -------------------- Add Force Channel --------------------
+# ------------------- Add Force Channel -------------------
 @Client.on_message(filters.command("addforce") & filters.user(ADMIN))
 async def add_force_channel(client, message):
     if len(message.command) < 2:
@@ -23,7 +21,7 @@ async def add_force_channel(client, message):
     force_col.insert_one({"channel": channel_id})
     await message.reply(f"Added Force Channel:\n`{channel_id}`")
 
-# -------------------- Remove Force Channel --------------------
+# ------------------- Remove Force Channel -------------------
 @Client.on_message(filters.command("removeforce") & filters.user(ADMIN))
 async def remove_force_channel(client, message):
     if len(message.command) < 2:
@@ -31,10 +29,9 @@ async def remove_force_channel(client, message):
 
     channel_id = message.command[1]
     force_col.delete_one({"channel": channel_id})
-
     await message.reply(f"Removed:\n`{channel_id}`")
 
-# -------------------- List Channels --------------------
+# ------------------- List Channels -------------------
 @Client.on_message(filters.command("forcechannels") & filters.user(ADMIN))
 async def list_channels(client, message):
     channels = list(force_col.find({}))
@@ -47,12 +44,12 @@ async def list_channels(client, message):
 
     await message.reply(text)
 
-# -------------------- Checker --------------------
+# ------------------- Force Subscribe Checker -------------------
 @Client.on_message(filters.private)
 async def check_sub(client, message):
     channels = list(force_col.find({}))
     if not channels:
-        return
+        return  # No force channels set
 
     for ch in channels:
         try:
@@ -60,7 +57,8 @@ async def check_sub(client, message):
             if member.status in ["left"]:
                 raise Exception()
         except:
+            # If user hasn't joined, send invite link
             invite = await client.create_chat_invite_link(ch["channel"])
             return await message.reply(
-                f"You must join first:\n{invite.invite_link}"
-    )
+                f"You must join this channel first:\n{invite.invite_link}"
+            )
