@@ -1,6 +1,6 @@
 from pyrogram import Client, filters
 from pymongo import MongoClient
-from sub import DB_URI, DB_NAME, ADMINS  # Using your config/sub.py variables
+from config import DB_URI, DB_NAME, ADMINS
 
 # ------------------- Database Connection -------------------
 db = MongoClient(DB_URI)[DB_NAME]
