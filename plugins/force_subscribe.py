@@ -1,10 +1,13 @@
 from pyrogram import Client, filters
 from pymongo import MongoClient
-from config import MONGO_URL, DB_NAME, ADMIN
+from config import DB_URI, DB_NAME, ADMINS
 
-# Connect to your real database
-db = MongoClient(MONGO_URL)[DB_NAME]    # <-- ForceSubDB हटा दिया
+# MongoDB connection
+db = MongoClient(DB_URI)[DB_NAME]  # Config se DB_NAME use karo
 force_col = db["force_sub"]
+
+# Default admin
+ADMIN = ADMINS[0]  # pehla admin as default
 
 # -------------------- Add Force Channel --------------------
 @Client.on_message(filters.command("addforce") & filters.user(ADMIN))
