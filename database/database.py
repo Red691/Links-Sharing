@@ -2,6 +2,7 @@ import motor.motor_asyncio
 import base64
 from config import DB_URI, DB_NAME
 from datetime import datetime, timedelta
+from motor.motor_asyncio import AsyncIOMotorClient
 
 dbclient = motor.motor_asyncio.AsyncIOMotorClient(DB_URI)
 database = dbclient[DB_NAME]
