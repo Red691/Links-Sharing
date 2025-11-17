@@ -6,9 +6,9 @@ from logging.handlers import RotatingFileHandler
 # Bot Credentials
 # ------------------------------------------------------------------------------------
 
-TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "")
-APP_ID = int(os.environ.get("APP_ID", "0"))
-API_HASH = os.environ.get("API_HASH", "")
+TG_BOT_TOKEN = os.environ.get("TG_BOT_TOKEN", "8247132120:AAGVmGcVa1iqycYVARBShJ40QfXYWW2lUGM")
+APP_ID = int(os.environ.get("APP_ID", "20594537"))
+API_HASH = os.environ.get("API_HASH", "c505a4e5bb7d482197875888af544f17")
 
 # ------------------------------------------------------------------------------------
 # Owner / Admin
@@ -32,8 +32,8 @@ if OWNER_ID not in ADMINS:
 # MongoDB
 # ------------------------------------------------------------------------------------
 
-DB_URI = os.environ.get("DATABASE_URL", "")
-DB_NAME = os.environ.get("DATABASE_NAME", "Sensei")
+DB_URI = os.environ.get("DATABASE_URL", "mongodb+srv://kumarnikhil05848:Kumarnikhil1513832380@cluster0.1nr8lgj.mongodb.net/?appName=Cluster0")
+DB_NAME = os.environ.get("DATABASE_NAME", "sensei")
 
 # ------------------------------------------------------------------------------------
 # Force Subscribe System
