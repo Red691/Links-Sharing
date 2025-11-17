@@ -7,6 +7,7 @@ from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, PORT
 from plugins import web_server
 import pyrogram.utils
 from aiohttp import web
+
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
 name = """
@@ -17,12 +18,15 @@ class Bot(Client):
     def __init__(self):
         super().__init__(
             name="Bot",
-            api_hash=API_HASH,
             api_id=APP_ID,
-            plugins={"root": "plugins"},
-            workers=TG_BOT_WORKERS,
+            api_hash=API_HASH,
             bot_token=TG_BOT_TOKEN,
+            workers=TG_BOT_WORKERS,
+            
+            # ✅ PLUGINS ENABLED HERE
+            plugins={"root": "plugins"}
         )
+
         self.LOGGER = LOGGER
 
     async def start(self):
