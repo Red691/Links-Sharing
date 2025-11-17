@@ -39,8 +39,8 @@ DB_NAME = os.environ.get("DATABASE_NAME", "sensei")
 # Force Subscribe System
 # ------------------------------------------------------------------------------------
 
-FORCE_SUB_CHANNEL = os.environ.get("FORCE_SUB_CHANNEL", "YourChannelUsername")
-FSUB_PIC = os.environ.get("FSUB_PIC", "https://i.ibb.co/xK56gh8W/photo-2025.jpg")
+FORCE_SUB_CHANNEL = os.environ.get("FORCE_SUB_CHANNEL", "")
+FSUB_PIC = os.environ.get("FSUB_PIC", "")
 
 # Toggle FSUB On/Off
 FORCE_SUB = os.environ.get("FORCE_SUB", "True").lower() == "true"
