@@ -1,5 +1,4 @@
 import asyncio
-import sys
 from datetime import datetime
 from pyrogram import Client
 from pyrogram.enums import ParseMode
@@ -7,9 +6,11 @@ from config import API_HASH, APP_ID, LOGGER, TG_BOT_TOKEN, TG_BOT_WORKERS, PORT
 from plugins import web_server
 import pyrogram.utils
 from aiohttp import web
+
+# Fix Pyrogram min channel ID crash
 pyrogram.utils.MIN_CHANNEL_ID = -1009147483647
 
-name = """
+BANNER = """
 Links Sharing Started
 """
 
@@ -25,21 +26,24 @@ class Bot(Client):
         )
         self.LOGGER = LOGGER
 
-    async def start(self):
+    async def start(self, *args, **kwargs):   # FIXED ⭐
         await super().start()
         usr_bot_me = await self.get_me()
         self.uptime = datetime.now()
 
         self.set_parse_mode(ParseMode.HTML)
-        self.LOGGER(__name__).info("Bot Running..!\n\nCreated by \nhttps://t.me/Okabe_xRintarou")
-        self.LOGGER(__name__).info(f"{name}")
+
+        self.LOGGER(__name__).info("Bot Running..!\n\nCreated by:\nhttps://t.me/Okabe_xRintarou")
+        self.LOGGER(__name__).info(f"{BANNER}")
         self.username = usr_bot_me.username
 
-        # Web-response
+        # Start Web Server (for Choreo health check)
         app = web.AppRunner(await web_server())
         await app.setup()
         bind_address = "0.0.0.0"
+
         await web.TCPSite(app, bind_address, PORT).start()
+        self.LOGGER(__name__).info(f"Web server running on PORT {PORT}")
 
     async def stop(self, *args):
         await super().stop()
