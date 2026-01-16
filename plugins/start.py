@@ -16,7 +16,7 @@ from helper_func import encode, decode
 from database.database import save_encoded_link, get_channel_by_encoded_link, save_encoded_link2, get_channel_by_encoded_link2
 from database.database import add_user, del_user, full_userbase, present_user, is_admin
 from plugins.newpost import revoke_invite_after_10_minutes
-from info import AUTH_CHANNEL
+from config import AUTH_CHANNEL
 from pyrogram.errors import *
 
 async def is_subscribed(bot, query, channel):
