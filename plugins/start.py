@@ -17,8 +17,7 @@ from database.database import save_encoded_link, get_channel_by_encoded_link, sa
 from database.database import add_user, del_user, full_userbase, present_user, is_admin
 from plugins.newpost import revoke_invite_after_10_minutes
 from config import AUTH_CHANNEL
-from pyrogram.errors import *
-
+ 
 async def is_subscribed(bot, query, channel):
     btn = []
     for id in channel:
