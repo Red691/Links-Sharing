@@ -1,10 +1,12 @@
 # --- For-Bot-Working --------- #
-git+https://github.com/Sahil0976/pyrogram
-TgCrypto
+pyrogram==2.0.106
+tgcrypto
 pyromod
 motor
+
 # --- For-Database ------------ #
 pymongo
 dnspython
+
 # --- For-Web-Response ------- #
 aiohttp
