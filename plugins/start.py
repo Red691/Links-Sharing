@@ -16,11 +16,39 @@ from helper_func import encode, decode
 from database.database import save_encoded_link, get_channel_by_encoded_link, save_encoded_link2, get_channel_by_encoded_link2
 from database.database import add_user, del_user, full_userbase, present_user, is_admin
 from plugins.newpost import revoke_invite_after_10_minutes
+from info import AUTH_CHANNEL
+from pyrogram.errors import *
+
+async def is_subscribed(bot, query, channel):
+    btn = []
+    for id in channel:
+        chat = await bot.get_chat(int(id))
+        try:
+            await bot.get_chat_member(id, query.from_user.id)
+        except UserNotParticipant:
+            btn.append([InlineKeyboardButton(f'Join {chat.title}', url=chat.invite_link)])
+        except Exception as e:
+            pass
+    return btn
         
 #=====================================================================================##
 
 @Bot.on_message(filters.command('start') & filters.private)
 async def start_command(client: Bot, message: Message):
+    if AUTH_CHANNEL:
+        try:
+            btn = await is_subscribed(client, message, AUTH_CHANNEL)
+            if btn:
+                username = (await client.get_me()).username
+                if message.command[1]:
+                    btn.append([InlineKeyboardButton("♻️ Try Again ♻️", url=f"https://t.me/{username}?start={message.command[1]}")])
+                else:
+                    btn.append([InlineKeyboardButton("♻️ Try Again ♻️", url=f"https://t.me/{username}?start=true")])
+                await message.reply_text(text=f"<b>👋 Hello {message.from_user.mention},\n\nPlease join the channel then click on try again button. 😇</b>", reply_markup=InlineKeyboardMarkup(btn))
+                return
+        except Exception as e:
+            print(e)
+                
     user_id = message.from_user.id
 
     # Check if the user is banned
